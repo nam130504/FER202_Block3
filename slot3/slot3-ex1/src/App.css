@@ -1,66 +1,153 @@
-.App {
-  font-family: Arial, sans-serif;
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
+/* Toàn bộ trang */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  margin: 0;
+  padding: 0;
+  color: #2c3e50;
 }
 
-h1 {
-  text-align: center;
-  color: #333;
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 25px;
 }
 
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-  justify-content: center;
+/* Tiêu đề */
+h2 {
+  margin-top: 40px;
+  color: #2c3e50;
+  border-left: 5px solid #3498db;
+  padding-left: 12px;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  position: relative;
 }
 
-.controls input,
-.controls select,
-.controls button {
-  padding: 8px 12px;
-  font-size: 14px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 10px;
+  width: 50px;
+  height: 3px;
+  background-color: #3498db;
+  border-radius: 2px;
 }
 
-.controls button {
-  background-color: #007bff;
+/* Nút */
+button {
+  background: linear-gradient(135deg, #6dd5fa, #2980b9);
   color: white;
+  padding: 8px 18px;
   border: none;
+  margin-bottom: 15px;
   cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.25s ease-in-out;
 }
 
-.controls button:hover {
-  background-color: #0056b3;
+button:hover {
+  background: linear-gradient(135deg, #2980b9, #1f6391);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
 }
 
+/* Input & Select */
+input, select {
+  padding: 8px 12px;
+  margin: 5px;
+  border: 1px solid #dcdde1;
+  border-radius: 6px;
+  outline: none;
+  background-color: white;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  font-size: 0.95rem;
+}
+
+input:focus, select:focus {
+  border-color: #3498db;
+  box-shadow: 0px 0px 6px rgba(52, 152, 219, 0.35);
+}
+
+/* Danh sách */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: white;
+  padding: 12px 15px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
+  transition: all 0.25s ease-in-out;
+  font-size: 0.95rem;
+}
+
+ul li:hover {
+  transform: translateX(5px);
+  box-shadow: 0px 6px 12px rgba(0,0,0,0.1);
+}
+
+/* Bảng */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 15px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
 }
 
-thead {
-  background-color: #f4f4f4;
-}
-
-th,
-td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-tr:nth-child(even) {
-  background-color: #fafafa;
-}
-
-p {
+table th, table td {
+  padding: 12px;
   text-align: center;
-  font-style: italic;
-  color: #888;
+  font-size: 0.95rem;
+}
+
+table th {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  font-weight: 600;
+}
+
+table tr:nth-child(even) {
+  background: #f7f9fb;
+}
+
+table tr:hover {
+  background-color: #ecf6ff;
+  transition: background 0.25s ease;
+}
+
+/* In đậm top 1 */
+.bold {
+  font-weight: bold;
+  background-color: #eaf2ff !important;
+}
+
+/* Statistics box */
+.statistics-box {
+  background: white;
+  border-radius: 8px;
+  padding: 18px;
+  margin-top: 18px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
+}
+
+.statistics-box h4 {
+  margin-bottom: 12px;
+  color: #34495e;
+  font-size: 1.1rem;
+}
+
+.statistics-box p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #555;
 }

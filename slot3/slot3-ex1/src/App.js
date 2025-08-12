@@ -1,114 +1,157 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
+import React, { useState, useMemo } from "react";
+import { persons } from "./personlist.js";
 
-const companies = [
-  { name: "Company One", category: "Finance", start: 1981, end: 2003 },
-  { name: "Company Two", category: "Retail", start: 1992, end: 2008 },
-  { name: "Company Three", category: "Auto", start: 1999, end: 2007 },
-  { name: "Company Four", category: "Retail", start: 1989, end: 2010 },
-  { name: "Company Five", category: "Technology", start: 2009, end: 2014 },
-  { name: "Company Six", category: "Finance", start: 1987, end: 2010 },
-  { name: "Company Seven", category: "Auto", start: 1986, end: 1996 },
-  { name: "Company Eight", category: "Technology", start: 2011, end: 2016 },
-  { name: "Company Nine", category: "Retail", start: 1980, end: 1989 }
-];
-
-function App() {
+export default function App() {
+  const [sortOrder, setSortOrder] = useState("asc"); // asc | desc
+  const [minAge, setMinAge] = useState("");
+  const [maxAge, setMaxAge] = useState("");
+  const [skill, setSkill] = useState("");
   const [search, setSearch] = useState("");
-  const [sortType, setSortType] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("All");
-  const [result, setResult] = useState(companies);
 
-  const categories = ["All", ...new Set(companies.map(c => c.category))];
+  // Danh sách skills unique
+  const allSkills = useMemo(() => {
+    return [...new Set(persons.flatMap(p => p.skills))];
+  }, []);
 
-  const toTitleCase = (str) =>
-    str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  // 1️⃣ Sort firstName
+  const sortedPersons = useMemo(() => {
+    return [...persons].sort((a, b) => {
+      if (sortOrder === "asc") return a.firstName.localeCompare(b.firstName);
+      return b.firstName.localeCompare(a.firstName);
+    });
+  }, [sortOrder]);
 
-  useEffect(() => {
-    let filtered = companies.filter(c =>
-      c.name.toLowerCase().includes(search.toLowerCase())
-    );
+  // 2️⃣ Lọc theo tuổi + skill
+  const filteredByAgeSkill = useMemo(() => {
+    return persons.filter(({ age, skills }) => {
+      const inAgeRange =
+        (!minAge || age >= Number(minAge)) &&
+        (!maxAge || age <= Number(maxAge));
+      const hasSkill = !skill || skills.includes(skill);
+      return inAgeRange && hasSkill;
+    });
+  }, [minAge, maxAge, skill]);
 
-    if (categoryFilter !== "All") {
-      filtered = filtered.filter(c => c.category === categoryFilter);
-    }
+  // 3️⃣ Ranking skill bằng reduce
+  const skillRanking = useMemo(() => {
+    const count = persons.reduce((acc, { skills }) => {
+      skills.forEach(s => {
+        acc[s] = (acc[s] || 0) + 1;
+      });
+      return acc;
+    }, {});
+    return Object.entries(count)
+      .sort((a, b) => b[1] - a[1]); // sort giảm dần
+  }, []);
 
-    switch (sortType) {
-      case "asc":
-        filtered.sort((a, b) => a.start - b.start);
-        break;
-      case "desc":
-        filtered.sort((a, b) => b.start - a.start);
-        break;
-      case "range":
-        filtered.sort((a, b) => (a.end - a.start) - (b.end - b.start));
-        break;
-      default:
-        break;
-    }
+  const topCount = skillRanking[0]?.[1];
 
-    setResult(filtered);
-  }, [search, sortType, categoryFilter]); // Tự chạy khi giá trị thay đổi
+  // 4️⃣ Search + Sort đa tiêu chí
+  const multiSortResult = useMemo(() => {
+    return persons
+      .filter(p =>
+        `${p.firstName} ${p.lastName}`.toLowerCase().includes(search.toLowerCase())
+      )
+      .sort((a, b) => {
+        // Ưu tiên isActive
+        if (a.isActive !== b.isActive) return b.isActive - a.isActive;
+        // Sau đó age tăng dần
+        if (a.age !== b.age) return a.age - b.age;
+        // Cuối cùng lastName A→Z
+        return a.lastName.localeCompare(b.lastName);
+      });
+  }, [search]);
+
+  const statistics = useMemo(() => {
+    const total = persons.length;
+    const avgAge = (persons.reduce((sum, p) => sum + p.age, 0) / total).toFixed(1);
+    const activeCount = persons.filter(p => p.isActive).length;
+    return { total, avgAge, activeCount };
+  }, []);
 
   return (
-    <div className="App">
-      <h1>Company List</h1>
+    <div style={{ padding: 20 }}>
+      <h2>1️⃣ Sort First Name</h2>
+      <button onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>
+        Sort First Name: {sortOrder === "asc" ? "A→Z" : "Z→A"}
+      </button>
+      <ul>
+        {sortedPersons.map(p => (
+          <li key={p.id}>
+            {p.firstName} {p.lastName} - {p.age} - {p.city} - {p.skills.join(", ")}
+          </li>
+        ))}
+      </ul>
 
-      <div className="controls">
-        <input
-          type="text"
-          placeholder="Search company..."
-          value={search}
-          onChange={e => setSearch(toTitleCase(e.target.value))}
-        />
+      <h2>2️⃣ Filter by Age & Skill</h2>
+      <input
+        type="number"
+        placeholder="Min age"
+        value={minAge}
+        onChange={e => setMinAge(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="Max age"
+        value={maxAge}
+        onChange={e => setMaxAge(e.target.value)}
+      />
+      <select value={skill} onChange={e => setSkill(e.target.value)}>
+        <option value="">-- Select skill --</option>
+        {allSkills.map(s => (
+          <option key={s} value={s}>{s}</option>
+        ))}
+      </select>
+      <ul>
+        {filteredByAgeSkill.length > 0 ? (
+          filteredByAgeSkill.map(p => (
+            <li key={p.id}>
+              {p.firstName} - {p.lastName} - {p.skills.join(", ")}
+            </li>
+          ))
+        ) : (
+          <li>No found</li>
+        )}
+      </ul>
 
-        <select value={sortType} onChange={e => setSortType(e.target.value)}>
-          <option value="">-- Sort by --</option>
-          <option value="asc">Year Start ↑</option>
-          <option value="desc">Year Start ↓</option>
-          <option value="range">Duration (Short → Long)</option>
-        </select>
-
-        <select
-          value={categoryFilter}
-          onChange={e => setCategoryFilter(e.target.value)}
-        >
-          {categories.map((cat, idx) => (
-            <option key={idx} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {result.length > 0 ? (
-        <table border="1" cellPadding="5">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Start</th>
-              <th>End</th>
-              <th>Duration</th>
+      <h2>3️⃣ Skill Ranking</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Skill</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          {skillRanking.map(([s, c]) => (
+            <tr key={s} style={{ fontWeight: c === topCount ? "bold" : "normal" }}>
+              <td>{s}</td>
+              <td>{c}</td>
             </tr>
-          </thead>
-          <tbody>
-            {result.map((c, idx) => (
-              <tr key={idx}>
-                <td>{c.name}</td>
-                <td>{c.category}</td>
-                <td>{c.start}</td>
-                <td>{c.end}</td>
-                <td>{c.end - c.start} years</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No result</p>
-      )}
+          ))}
+        </tbody>
+      </table>
+
+      <h2>4️⃣ Multi-criteria Sort + Statistics</h2>
+      <input
+        type="text"
+        placeholder="Search name"
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+      />
+      <ul>
+        {multiSortResult.map(p => (
+          <li key={p.id}>
+            {p.firstName} {p.lastName} - Age: {p.age} - Active: {p.isActive ? "Yes" : "No"}
+          </li>
+        ))}
+      </ul>
+      <div style={{ border: "1px solid gray", padding: "10px", marginTop: "10px" }}>
+        <h4>Statistics</h4>
+        <p>Total persons: {statistics.total}</p>
+        <p>Average age: {statistics.avgAge}</p>
+        <p>Active count: {statistics.activeCount}</p>
+      </div>
     </div>
   );
 }
-
-export default App;
