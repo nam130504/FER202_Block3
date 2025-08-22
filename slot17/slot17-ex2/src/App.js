@@ -10,14 +10,14 @@ const dishes = [
   {
     id: 0,
     name: "Uthappizza",
-    image: "images/uthappizza.png",
+    image: "images/uthappizza.jpg",
     price: "4.99",
     description: "A unique combination of Indian Uthappam and Italian pizza.",
   },
   {
     id: 1,
     name: "Zucchipakoda",
-    image: "images/zucchipakoda.png",
+    image: "images/zucchipakoda.jpg",
     price: "1.99",
     description: "Deep fried Zucchini with chickpea batter.",
   },
@@ -31,7 +31,7 @@ const dishes = [
   {
     id: 3,
     name: "ElaiCheese Cake",
-    image: "images/elaicheesecake.png",
+    image: "images/elaicheesecake.jpg",
     price: "2.99",
     description: "New York Style Cheesecake with Indian cardamoms.",
   },
