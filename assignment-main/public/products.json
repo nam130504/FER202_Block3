@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "title": "Honda Wave Alpha",
+    "name": "Wave Alpha 110cc",
+    "image": "https://media.vov.vn/sites/default/files/styles/large/public/2023-07/honda_wave_alpha_1.jpg?w=400&h=300&fit=crop",
+    "price": 25000000,
+    "salePrice": 22000000,
+    "tags": ["hot", "sale"],
+    "description": "Xe máy tiết kiệm nhiên liệu, phù hợp cho việc di chuyển hàng ngày"
+  },
+  {
+    "id": 2,
+    "title": "Yamaha Exciter 150",
+    "name": "Exciter 150cc",
+    "image": "https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/04/Exciter-155VVA-Pre-GP-004-1-768x576.png?w=400&h=300&fit=crop",
+    "price": 45000000,
+    "tags": ["hot"],
+    "description": "Xe thể thao hiệu suất cao, thiết kế hiện đại"
+  },
+  {
+    "id": 3,
+    "title": "Honda Vision",
+    "name": "Vision 110cc",
+    "image": "https://bizweb.dktcdn.net/100/523/203/products/vs-trang.png?v=1732767771220?w=400&h=300&fit=crop",
+    "price": 28000000,
+    "salePrice": 25000000,
+    "tags": ["sale"],
+    "description": "Xe tay ga tiện lợi, phù hợp cho mọi lứa tuổi"
+  },
+  {
+    "id": 4,
+    "title": "SYM Attila",
+    "name": "Attila 125cc",
+    "image": "https://tayamotor.vn/wp-content/uploads/2024/01/white_45o-left_copy-2.jpg?w=400&h=300&fit=crop",
+    "price": 32000000,
+    "tags": ["hot"],
+    "description": "Xe máy bền bỉ, giá cả hợp lý"
+  },
+  {
+    "id": 5,
+    "title": "Honda Air Blade",
+    "name": "Air Blade 125cc",
+    "image": "https://cdn.honda.com.vn/motorbike-strong-points/October2024/UgEhStcH1u8dHgqSA7ZB.png?w=400&h=300&fit=crop",
+    "price": 38000000,
+    "salePrice": 35000000,
+    "tags": ["hot", "sale"],
+    "description": "Xe tay ga cao cấp, thiết kế sang trọng"
+  },
+  {
+    "id": 6,
+    "title": "Yamaha Grande",
+    "name": "Grande 125cc",
+    "image": "https://yamaha-motor.com.vn/wp/wp-content/uploads/2024/07/Grande-Limit-Pink-Orange-Metallic-004-768x645.png?w=400&h=300&fit=crop",
+    "price": 42000000,
+    "tags": ["hot"],
+    "description": "Xe tay ga hiện đại, công nghệ tiên tiến"
+  },
+  {
+    "id": 7,
+    "title": "Honda Winner X",
+    "name": "Winner X 150cc",
+    "image": "https://img.tinxe.vn/resize/1000x-/2021/12/24/XForF7yt/honda-winner-x-tieu-chuan-4-d65b.jpg?w=400&h=300&fit=crop",
+    "price": 52000000,
+    "salePrice": 48000000,
+    "tags": ["sale"],
+    "description": "Xe côn tay thể thao, hiệu suất cao"
+  },
+  {
+    "id": 8,
+    "title": "SYM Sirius",
+    "name": "Sirius 110cc",
+    "image": "https://vnn-imgs-f.vgcloud.vn/2021/12/28/10/mua-xe-may-gia-re-chon-yamaha-sirius-honda-wave-alpha-hay-sym-elegant.png?width=260&s=v22U8KMkKgUpUKGc6pd5zg?w=400&h=300&fit=crop",
+    "price": 26000000,
+    "tags": ["hot"],
+    "description": "Xe máy tiết kiệm, phù hợp cho sinh viên"
+  },
+  {
+    "id": 9,
+    "title": "Honda PCX 150",
+    "name": "PCX 150cc",
+    "image": "https://cdn.baohatinh.vn/images/d13282e21bddc598a57af0948c2d56338b98c7cd2feb09850705ac8c27707665234e603bdb659f6def492982a0527765/77d4153300t5079l1.jpg?w=400&h=300&fit=crop",
+    "price": 85000000,
+    "salePrice": 78000000,
+    "tags": ["hot", "sale"],
+    "description": "Xe tay ga cao cấp, công nghệ hybrid"
+  },
+  {
+    "id": 10,
+    "title": "Yamaha NVX",
+    "name": "NVX 155cc",
+    "image": "https://yamaha-motor.com.vn/wp/wp-content/uploads/2020/10/X30-Black-001-1.png?w=400&h=300&fit=crop",
+    "price": 72000000,
+    "tags": ["hot"],
+    "description": "Xe thể thao tay ga, thiết kế độc đáo"
+  },
+  {
+    "id": 11,
+    "title": "Honda SH Mode",
+    "name": "SH Mode 125cc",
+    "image": "https://photo2.tinhte.vn/data/attachment-files/2022/11/6189863_cover-sh.jpg?w=400&h=300&fit=crop",
+    "price": 68000000,
+    "salePrice": 62000000,
+    "tags": ["sale"],
+    "description": "Xe tay ga sang trọng, phong cách châu Âu"
+  },
+  {
+    "id": 12,
+    "title": "SYM VF3i",
+    "name": "VF3i 125cc",
+    "image": "https://i-vnexpress.vnecdn.net/2018/04/16/SYM-VF3i-BM-500px-6760-1523855429.jpg?w=400&h=300&fit=crop",
+    "price": 35000000,
+    "tags": ["hot"],
+    "description": "Xe tay ga hiện đại, giá cả cạnh tranh"
+  }
+] 
