@@ -1,0 +1,11 @@
+/* a few small resets */
+* { box-sizing: border-box; }
+html,body,#root { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  background: #f5f6f8;
+  color: #222;
+}
+a { text-decoration: none; }
